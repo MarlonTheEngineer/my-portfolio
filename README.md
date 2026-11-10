@@ -1,27 +1,67 @@
 # Marlon Taylor | Technical Portfolio
-This repository contains a new static portfolio website and practical Python learning projects.
 
-## Website
-Site files: `docs/index.html` and `docs/styles.css`. Open `docs/index.html` locally to preview.
+[**Visit the live portfolio**](https://marlontheengineer.github.io/my-portfolio/) | [GitHub profile](https://github.com/MarlonTheEngineer)
 
-To publish on GitHub Pages: visit **Settings > Pages**, select **Deploy from a branch**, then select **main** and **/docs**. Once GitHub confirms the build, use the Pages URL shown in Settings.
+A lightweight, responsive HTML/CSS portfolio hosted using **GitHub Pages**. This repository also contains two small Python applications demonstrating practical IT automation and testing.
 
-## Git quick start (PowerShell)
-1. Install Git: https://git-scm.com/download/win
-2. Run `git --version`.
-3. Configure `git config --global user.name "Marlon Taylor"` and `git config --global user.email "YOUR_GITHUB_EMAIL"`.
-4. Clone with `git clone https://github.com/MarlonTheEngineer/my-portfolio.git`.
-5. Run `cd my-portfolio` and `git status`.
-6. Create a branch: `git switch -c feature/update-portfolio`.
-7. Edit the headline in `docs/index.html`.
-8. Review with `git diff`, stage with `git add docs/index.html`, then commit with `git commit -m "Update portfolio introduction"`.
-9. Upload the branch with `git push -u origin feature/update-portfolio`.
-10. On GitHub, open a pull request and merge it after reviewing the changes.
+## Structure
 
-Do not upload account credentials, tokens, production logs, or customer data.
+| Path | Description |
+| --- | --- |
+| `docs/index.html` | Portfolio content and navigation |
+| `docs/styles.css` | Layout, responsive styles, typography |
+| `projects/helpdesk-ticket-cli/` | Python + SQLite support ticket tracker |
+| `projects/log-analyzer/` | Python parser for synthetic security logs |
+| `scripts/check_site.py` | Automated static-site quality checks |
+| `.github/workflows/python-tests.yml` | Python tests and website validation |
 
-## Projects
-- [Helpdesk Ticket Tracker](projects/helpdesk-ticket-cli/README.md) (Python, SQLite)
-- [Security Log Analyzer](projects/log-analyzer/README.md) (Python, structured logs)
+The website is served from `main` → `/docs` via GitHub Pages. Changes pushed to `main` automatically trigger a Pages build. No Node.js, React, or npm dependencies are required.
 
-The previous Create React App scaffolding remains in the root, but the static site in docs does not require React or npm.
+## Preview on a computer
+
+Clone the repository, then:
+
+```powershell
+cd my-portfolio
+python -m http.server 8000 --directory docs
+```
+
+Open http://localhost:8000/ and press Ctrl+C in the terminal to stop the local server. Python 3.10+ is recommended.
+
+## Run quality checks
+
+```powershell
+python scripts/check_site.py
+python -m unittest discover -s projects/helpdesk-ticket-cli/tests -v
+python -m unittest discover -s projects/log-analyzer/tests -v
+```
+
+Automated checks run in GitHub Actions when portfolio or project files change.
+
+## Git exercise
+
+```powershell
+git clone https://github.com/MarlonTheEngineer/my-portfolio.git
+cd my-portfolio
+git switch -c feature/my-update
+# Edit docs/index.html, then:
+git diff
+git add docs/index.html
+git commit -m "docs: update portfolio introduction"
+git push -u origin feature/my-update
+```
+
+Open a pull request on GitHub, review changes, and merge it.
+
+## Project details
+
+- [Helpdesk Ticket Tracker](projects/helpdesk-ticket-cli/README.md): create, close, list and summarize local SQLite tickets.
+- [Security Log Analyzer](projects/log-analyzer/README.md): parse a documented practice log format, count severities, and report source IPs.
+
+These are **learning projects**, not production security or helpdesk systems. Avoid committing secrets, real ticket data, user information, or production logs.
+
+## Deployment
+
+Published site: https://marlontheengineer.github.io/my-portfolio/
+
+If deployment stops working, check **Actions** and **Settings → Pages** in this repository. GitHub Pages should use branch `main` and folder `/docs`.
