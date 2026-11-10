@@ -1,0 +1,7 @@
+2026-11-10T08:15:00Z INFO src=192.168.1.5 msg=Service started
+2026-11-10T08:20:00Z WARN src=192.168.1.22 msg=Multiple login attempts
+2026-11-10T08:21:00Z ERROR src=192.168.1.22 msg=Authentication failed
+2026-11-10T08:22:00Z ERROR src=192.168.1.22 msg=Authentication failed
+2026-11-10T08:23:00Z INFO src=192.168.1.5 msg=Health check passed
+2026-11-10T08:24:00Z CRITICAL src=10.0.0.7 msg=Service unavailable
+not a valid event
