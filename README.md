@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Marlon Taylor | Technical Portfolio
+This repository contains a new static portfolio website and practical Python learning projects.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Website
+Site files: `docs/index.html` and `docs/styles.css`. Open `docs/index.html` locally to preview.
 
-## Available Scripts
+To publish on GitHub Pages: visit **Settings > Pages**, select **Deploy from a branch**, then select **main** and **/docs**. Once GitHub confirms the build, use the Pages URL shown in Settings.
 
-In the project directory, you can run:
+## Git quick start (PowerShell)
+1. Install Git: https://git-scm.com/download/win
+2. Run `git --version`.
+3. Configure `git config --global user.name "Marlon Taylor"` and `git config --global user.email "YOUR_GITHUB_EMAIL"`.
+4. Clone with `git clone https://github.com/MarlonTheEngineer/my-portfolio.git`.
+5. Run `cd my-portfolio` and `git status`.
+6. Create a branch: `git switch -c feature/update-portfolio`.
+7. Edit the headline in `docs/index.html`.
+8. Review with `git diff`, stage with `git add docs/index.html`, then commit with `git commit -m "Update portfolio introduction"`.
+9. Upload the branch with `git push -u origin feature/update-portfolio`.
+10. On GitHub, open a pull request and merge it after reviewing the changes.
 
-### `npm start`
+Do not upload account credentials, tokens, production logs, or customer data.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Projects
+- [Helpdesk Ticket Tracker](projects/helpdesk-ticket-cli/README.md) (Python, SQLite)
+- [Security Log Analyzer](projects/log-analyzer/README.md) (Python, structured logs)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The previous Create React App scaffolding remains in the root, but the static site in docs does not require React or npm.
