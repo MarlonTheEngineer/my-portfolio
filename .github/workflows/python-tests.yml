@@ -35,3 +35,9 @@ jobs:
         run: python -m unittest discover -s projects/helpdesk-ticket-cli/tests -v
       - name: Test log analyzer
         run: python -m unittest discover -s projects/log-analyzer/tests -v
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test neural network engine
+        run: node --test docs/neural-network/tests.js

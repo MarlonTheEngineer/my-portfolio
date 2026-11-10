@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1020">
+  <meta name="description" content="Train a real neural network in your browser. Explore backpropagation, loss, accuracy, and classification boundaries with zero dependencies.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Neural Network Playground | Marlon Taylor">
+  <meta property="og:description" content="An interactive neural network that learns to classify patterns, built from scratch in JavaScript.">
+  <title>Neural Network Playground | Marlon Taylor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to experiment</a>
+  <header class="topbar"><div class="wrap nav">
+    <a class="brand" href="../"><span class="brand-icon">MT</span><span>Marlon <em>/ labs</em></span></a>
+    <a class="back" href="../">← Main portfolio</a>
+  </div></header>
+  <main id="main" class="wrap">
+    <div class="top"><div class="overline"><span class="live-dot"></span> INTERACTIVE MACHINE LEARNING LAB</div>
+      <h1>Watch a neural network <span>learn.</span></h1>
+      <p class="subtitle">No pre-trained model. No external AI service. A real <strong>2 → 12 → 12 → 1</strong> neural network trains right here in your browser, from random weights to a useful decision boundary.</p>
+    </div>
+    <section class="experiment" aria-label="Interactive classifier">
+      <div class="left">
+        <div class="panel-heading"><div><p class="eyebrow">THE CLASSIFICATION MAP</p><h2>How the model sees patterns</h2></div><span class="legend"><i class="mint"></i> Class A <i class="violet"></i> Class B</span></div>
+        <div class="plot"><canvas id="decision-canvas" width="520" height="520" aria-label="Interactive classification map with mint and violet data points. Click to inspect a prediction.">Your browser does not support the canvas element.</canvas><div class="plot-label label-left">−1</div><div class="plot-label label-right">+1</div></div>
+        <p class="plot-explainer" id="sample-status" aria-live="polite">Click the map to inspect a prediction.</p>
+      </div>
+      <div class="right">
+        <div class="controls panel"><p class="eyebrow">TRAINING CONTROLS</p><h2>Build a decision boundary</h2>
+          <label for="dataset">Choose a pattern</label>
+          <select id="dataset"><option value="xor">XOR: opposite quadrants</option><option value="circle">Circle: inside versus outside</option><option value="wave">Wave: above versus below</option></select>
+          <div class="label-row"><label for="rate">Learning rate</label><output for="rate" id="rate-value">0.023</output></div>
+          <input type="range" id="rate" min="0.005" max="0.05" step="0.001" value="0.023">
+          <div class="buttons"><button id="train-button" class="primary">Train network</button><button id="reset-button" class="secondary">Reset</button></div>
+          <p class="status"><span class="status-dot"></span><span id="status" aria-live="polite">Ready to learn</span></p>
+        </div>
+        <div class="stats"><div><span>TRAINING STEPS</span><strong id="epoch-value">0</strong></div><div><span>VALIDATION ACCURACY</span><strong id="accuracy-value">—</strong></div><div><span>BATCH LOSS</span><strong id="loss-value">—</strong></div></div>
+        <div class="loss panel"><div class="loss-head"><div><p class="eyebrow">LOSS HISTORY</p><h2>Error over time</h2></div><span class="pill">Live</span></div><canvas id="loss-canvas" width="500" height="190" aria-label="Graph of average training loss during training"></canvas><div class="progress" role="progressbar" aria-label="Training progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress"><div class="bar" id="progress-fill"></div></div></div>
+      </div>
+    </section>
+    <section class="under" aria-label="How the network works">
+      <div class="section-title"><p class="eyebrow">BEHIND THE CURTAIN</p><h2>A genuine multilayer neural network</h2><p>Each training step uses examples, calculates a prediction, measures error, and updates the weights using backpropagation and Adam optimization.</p></div>
+      <div class="steps"><article><span>01 / INPUT</span><h3>Coordinates</h3><p>Two numbers, <strong>x</strong> and <strong>y</strong>, represent each point on the map.</p></article><article><span>02 / HIDDEN LAYERS</span><h3>24 neurons</h3><p>Two layers of 12 tanh neurons learn nonlinear relationships between points.</p></article><article><span>03 / OUTPUT</span><h3>Probability</h3><p>A sigmoid neuron predicts the probability that the point belongs to Class A.</p></article><article><span>04 / FEEDBACK</span><h3>Backpropagation</h3><p>Cross-entropy loss supplies feedback that updates weights after every mini-batch.</p></article></div>
+    </section>
+    <footer class="footer"><div><strong>NEURAL NETWORK PLAYGROUND</strong><p>A portfolio experiment by Marlon Taylor. Synthetic data only. Runs entirely in your browser.</p></div><a href="https://github.com/MarlonTheEngineer/my-portfolio/tree/main/docs/neural-network">View source on GitHub ↗</a></footer>
+  </main>
+  <script src="neural-network.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
