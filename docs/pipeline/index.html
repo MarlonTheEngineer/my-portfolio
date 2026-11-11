@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09111d">
+  <meta name="description" content="The Release Control Room: a real Python and GitHub Actions CI/CD project with tests, reproducible artifacts, SHA-256 verification, and GitHub Pages deployment checks.">
+  <meta property="og:title" content="Release Control Room | Marlon Taylor">
+  <meta property="og:description" content="Follow the real automated tests, release artifacts, GitHub Pages deployments, and smoke checks powering this portfolio.">
+  <title>Release Control Room | Marlon Taylor</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <a class="brand" href="../"><span class="mark">MT</span><span>MARLON <span class="faint">/ ENGINEERING LABS</span></span></a>
+      <div class="navright"><a href="../">Portfolio</a><a href="https://github.com/MarlonTheEngineer/my-portfolio/tree/main/projects/ci-cd-pipeline">Source ↗</a><a class="outline" href="https://github.com/MarlonTheEngineer/my-portfolio/actions">GitHub Actions ↗</a></div>
+    </nav>
+  </header>
+  <main id="main" class="wrap">
+    <section class="hero">
+      <div class="overline"><span class="signal"></span> LIVE ENGINEERING PROJECT <span class="separator">/</span> 05</div>
+      <h1>EVERY COMMIT.<br><span>VERIFIED.</span></h1>
+      <p class="lead">A real automated testing and release pipeline built in Python and GitHub Actions. Each change is checked, packaged with integrity hashes, and published through the portfolio's existing GitHub Pages hosting.</p>
+      <div class="hero-actions"><a class="primary" href="#stages">Explore the pipeline <span>↘</span></a><a class="ghost" href="https://github.com/MarlonTheEngineer/my-portfolio/actions">View real workflow runs ↗</a></div>
+      <div class="meta"><span>PYTHON 3.11 + 3.12</span><span>NODE.JS 22</span><span>SHA-256</span><span>GITHUB ACTIONS</span><span>GITHUB PAGES</span></div>
+    </section>
+    <section class="monitor" aria-labelledby="monitor-heading">
+      <div class="sectionline"><div><div class="eyebrow">01 / OPERATIONAL TELEMETRY</div><h2 id="monitor-heading">Actual pipeline status</h2></div><button class="refresh" type="button" id="refresh">Refresh status <span aria-hidden="true">↻</span></button></div>
+      <p class="explain">Read-only data from this repository's public GitHub Actions history. The browser cannot trigger a deployment. The source-of-truth links open the actual runs.</p>
+      <div class="monitor-grid">
+        <article class="run-card">
+          <div class="run-head"><span>CI / AUTOMATED TESTS</span><span class="state loading" id="ci-state">CHECKING</span></div>
+          <div class="run-glyph">01 <span>▰▱▱▱</span></div>
+          <h3 id="ci-title">Loading latest run</h3><p id="ci-subtitle">Checking the GitHub Actions API.</p>
+          <a id="ci-link" href="https://github.com/MarlonTheEngineer/my-portfolio/actions" target="_blank" rel="noopener noreferrer">Open workflow →</a>
+        </article>
+        <article class="run-card">
+          <div class="run-head"><span>CD / GITHUB PAGES</span><span class="state loading" id="deploy-state">CHECKING</span></div>
+          <div class="run-glyph">02 <span>▰▰▱▱</span></div>
+          <h3 id="deploy-title">Loading latest deployment</h3><p id="deploy-subtitle">Checking the GitHub Pages build.</p>
+          <a id="deploy-link" href="https://github.com/MarlonTheEngineer/my-portfolio/deployments" target="_blank" rel="noopener noreferrer">Open deployment →</a>
+        </article>
+        <article class="run-card">
+          <div class="run-head"><span>POST-DEPLOY / HEALTH</span><span class="state loading" id="smoke-state">CHECKING</span></div>
+          <div class="run-glyph">03 <span>▰▰▰▰</span></div>
+          <h3 id="smoke-title">Loading site checks</h3><p id="smoke-subtitle">Health checks run separately after publication.</p>
+          <a id="smoke-link" href="https://github.com/MarlonTheEngineer/my-portfolio/actions" target="_blank" rel="noopener noreferrer">Open checks →</a>
+        </article>
+      </div>
+      <p class="live-note" id="api-message" role="status">Fetching public run metadata. If GitHub limits anonymous API requests, use the workflow links above.</p>
+    </section>
+    <section class="stages" id="stages" aria-labelledby="stages-heading">
+      <div class="sectionline"><div><div class="eyebrow">02 / THE DELIVERY CHAIN</div><h2 id="stages-heading">Five stages. One release.</h2></div><span class="annotation">AUDITABLE / REPRODUCIBLE</span></div>
+      <div class="chain">
+        <article class="stage"><div class="stage-index"><b>01</b><i></i></div><div class="stage-body"><span class="stage-label">SOURCE CONTROL</span><h3>Commit &amp; Pull Request</h3><p>Push code or open a pull request. GitHub Actions starts validation automatically, before the release package is built.</p><code>git push origin feature/my-change</code></div></article>
+        <article class="stage"><div class="stage-index"><b>02</b><i></i></div><div class="stage-body"><span class="stage-label">QUALITY GATE</span><h3>Tests &amp; Site Audit</h3><p>Python 3.11 and 3.12 run all application tests. Node.js verifies JavaScript. A custom auditor checks every HTML page and its internal links, images, scripts, and styles.</p><code>python projects/ci-cd-pipeline/pipeline.py check</code></div></article>
+        <article class="stage"><div class="stage-index"><b>03</b><i></i></div><div class="stage-body"><span class="stage-label">RELEASE ENGINEERING</span><h3>Package &amp; Verify</h3><p>Once tests pass, Python creates a deterministic ZIP of the website, calculates SHA-256 checksums for each file, verifies the archive, and uploads it as a downloadable GitHub Actions artifact.</p><code>python projects/ci-cd-pipeline/pipeline.py build</code></div></article>
+        <article class="stage"><div class="stage-index"><b>04</b><i></i></div><div class="stage-body"><span class="stage-label">PRODUCTION DELIVERY</span><h3>Publish to GitHub Pages</h3><p>The existing GitHub Pages branch source automatically publishes <code>main/docs</code>. This hosting path is separate from our CI artifact and does not require a paid build service.</p><code>main → docs/ → GitHub Pages</code></div></article>
+        <article class="stage"><div class="stage-index"><b>05</b></div><div class="stage-body"><span class="stage-label">DEPLOYMENT MONITORING</span><h3>Public URL Smoke Test</h3><p>A follow-up workflow checks that key public pages load over HTTPS and contain expected content. A failure is reported in GitHub Actions.</p><code>python projects/ci-cd-pipeline/pipeline.py smoke</code></div></article>
+      </div>
+      <aside class="truth"><strong>Deployment architecture note</strong><p>GitHub Pages currently deploys directly from <code>main/docs</code>. CI runs independently, so a failed test does <em>not</em> block the automatic Pages publication. This project provides an artifact quality gate and post-publication verification. A strict blocking deployment gate would require switching Pages to GitHub Actions and enforcing branch protections.</p></aside>
+    </section>
+    <section class="simulation" id="simulation" aria-labelledby="simulation-heading">
+      <div class="sectionline"><div><div class="eyebrow">03 / FAILURE INJECTION LAB</div><h2 id="simulation-heading">What happens if code breaks?</h2></div><span class="annotation">INTERACTIVE EXPLANATION / NOT A LIVE DEPLOY</span></div>
+      <p class="explain">Select a hypothetical change to understand which automated check catches it. This lab is a simulation, clearly separated from the real workflow statuses above.</p>
+      <div class="lab">
+        <div class="lab-controls">
+          <label for="scenario">Choose a commit scenario</label>
+          <select id="scenario"><option value="clean">Valid feature: tests and links pass</option><option value="link">Broken link: page references missing.html</option><option value="unit">Regression: a Python unit test fails</option><option value="tamper">Tampered ZIP: release checksum doesn't match</option><option value="live">Published page returns HTTP 404</option></select>
+          <button type="button" id="simulate">Simulate pipeline <span>↗</span></button>
+          <p>Nothing is committed, deployed, or modified when you run a simulation.</p>
+        </div>
+        <div class="lab-result" aria-live="polite">
+          <div class="lab-label">SIMULATED OUTCOME <span id="simulation-badge">READY</span></div>
+          <div class="segment-track" id="segment-track" aria-label="Five pipeline stages">
+            <div class="segment" data-step="1"><span>01</span><strong>COMMIT</strong></div>
+            <div class="segment" data-step="2"><span>02</span><strong>TEST</strong></div>
+            <div class="segment" data-step="3"><span>03</span><strong>BUILD</strong></div>
+            <div class="segment" data-step="4"><span>04</span><strong>PUBLISH</strong></div>
+            <div class="segment" data-step="5"><span>05</span><strong>SMOKE</strong></div>
+          </div>
+          <h3 id="simulation-headline">Select a scenario to preview its outcome</h3>
+          <p id="simulation-result">The actual production deployment is never affected by this interactive demonstration.</p>
+        </div>
+      </div>
+    </section>
+    <section class="artifacts">
+      <div class="sectionline"><div><div class="eyebrow">04 / REPRODUCIBLE BUILDS</div><h2>Inside the release archive</h2></div><span class="annotation">ZIP + SHA-256 MANIFEST</span></div>
+      <div class="artifact-grid">
+        <div class="manifest"><div class="manifest-head"><span>RELEASE-MANIFEST.JSON</span><span>EXAMPLE FORMAT</span></div><pre><code>{
+  "schema_version": 1,
+  "source_commit": "&lt;git-commit-sha&gt;",
+  "files": [
+    {
+      "path": "site/index.html",
+      "sha256": "&lt;64-character-sha256&gt;",
+      "bytes": 4210
+    }
+  ]
+}</code></pre><p>The values shown are illustrative. Each actual workflow release contains the real paths, byte counts, and hashes of its own files.</p></div>
+        <div class="artifact-copy"><div class="icon-title">⌁</div><h3>BUILD ONCE.<br><span>VERIFY EVERY BYTE.</span></h3><p>Every release archive can be independently verified. If a file is silently changed after packaging, its checksum no longer matches the signed-off manifest.</p><a href="https://github.com/MarlonTheEngineer/my-portfolio/actions">Browse downloadable workflow artifacts ↗</a><a href="https://github.com/MarlonTheEngineer/my-portfolio/tree/main/projects/ci-cd-pipeline">Read implementation and tests ↗</a></div>
+      </div>
+    </section>
+    <section class="docs-cta"><div><div class="eyebrow">05 / SOURCE + DOCUMENTATION</div><h2>Not just a diagram.<br><span>A running engineering system.</span></h2><p>Read the Python release builder, unit tests, GitHub workflow definitions, deployment smoke checks, and step-by-step operating notes.</p></div><a class="primary" href="https://github.com/MarlonTheEngineer/my-portfolio/tree/main/projects/ci-cd-pipeline">Explore project documentation ↗</a></section>
+    <footer><span>© 2026 MARLON TAYLOR / ENGINEERING LABS</span><span>SELF-HOSTED ON GITHUB PAGES · NO VERCEL</span></footer>
+  </main>
+</body>
+</html>
