@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI Helpdesk Copilot: a portfolio demo of cited IT troubleshooting guidance, incident tickets, and optional local AI.">
+  <meta name="theme-color" content="#091320">
+  <meta property="og:title" content="AI Helpdesk Copilot | Marlon Taylor">
+  <meta property="og:description" content="Explore a knowledge-grounded helpdesk assistant and optional offline local AI integration.">
+  <title>AI Helpdesk Copilot | Marlon Taylor</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to app</a>
+<header class="topbar">
+  <div class="shell nav">
+    <a href="../" class="logo"><span class="logomark">MT</span><span>MARLON <span class="logo-light">/ LABS</span></span></a>
+    <div class="toplinks"><a href="../">Portfolio</a><a href="https://github.com/MarlonTheEngineer/my-portfolio/tree/main/projects/ai-helpdesk-copilot">Source code ↗</a></div>
+  </div>
+</header>
+<main id="main" class="shell">
+  <section class="intro">
+    <div class="eyebrow"><span class="live"></span> ENGINEERING PROJECT 04 / IT AUTOMATION</div>
+    <h1>Helpdesk support.<br><span>Smarter workflows.</span></h1>
+    <p>A practical IT troubleshooting assistant built with searchable knowledge articles, cited recommendations, and an optional local AI engine. Explore how modern support tools can organize technical work.</p>
+    <div class="pills"><span>Python</span><span>JavaScript</span><span>SQLite</span><span>Local Ollama (optional)</span></div>
+  </section>
+  <section class="notice" aria-label="Important note"><span class="notice-symbol">i</span><p><strong>Educational sandbox.</strong> Use fictional problems and sample tickets only. The public demo uses deterministic knowledge search, <strong>not an AI language model</strong>. Running the local Python server unlocks persistent tickets and optional on-device AI.</p></section>
+  <div class="systembar">
+    <div><span class="label">SYSTEM STATE</span><strong id="mode-label">Loading knowledge base...</strong></div>
+    <div class="system-metrics"><div><b id="article-count">—</b><span>Knowledge articles</span></div><div><b id="ticket-count">—</b><span>Tickets</span></div><div><b id="open-count">—</b><span>Open</span></div></div>
+  </div>
+  <section class="workspace" id="assistant">
+    <div class="conversation panel">
+      <div class="panel-header">
+        <div><p class="micro">01 / ASSISTANT CONSOLE</p><h2>Describe an IT issue</h2><p class="hint">Search approved troubleshooting steps and examine the supporting articles.</p></div>
+        <span class="status-chip">SOURCE GROUNDED</span>
+      </div>
+      <div class="quick">
+        <span>TRY AN EXAMPLE</span>
+        <div class="suggestions"><button type="button" data-ask="A user is locked out and cannot sign in to Windows.">Account locked</button><button type="button" data-ask="The VPN fails to connect when working remotely.">VPN failure</button><button type="button" data-ask="A printer shows offline and print jobs are stuck.">Printer offline</button></div>
+      </div>
+      <div class="messages" id="messages" aria-live="polite" aria-label="Troubleshooting conversation">
+        <div class="message assistant"><span class="speaker">COPILOT · KNOWLEDGE ASSISTANT</span><p>Tell me what stopped working. I'll find matching troubleshooting procedures and link the exact articles I used.</p></div>
+      </div>
+      <form id="assist-form" class="askbox">
+        <label for="question">Your support question</label>
+        <div class="entry"><input id="question" maxlength="600" minlength="3" required placeholder="Example: A user cannot receive MFA codes..." autocomplete="off"><button id="ask-button" type="submit">Find guidance <span aria-hidden="true">↗</span></button></div>
+        <small>Knowledge results are suggestions, not verified diagnoses. Review every step before use.</small>
+      </form>
+    </div>
+    <aside class="context panel" aria-label="Retrieved evidence">
+      <div class="panel-header context-header"><div><p class="micro">02 / EVIDENCE PANEL</p><h2>Supporting sources</h2><p class="hint">Recommendations link back to these original, editable runbooks.</p></div></div>
+      <div id="sources" class="source-list"><div class="empty"><span class="empty-icon">⌕</span><p>Ask a question to see its matching knowledge articles and safety notes.</p></div></div>
+    </aside>
+  </section>
+  <section class="queue-section" id="tickets">
+    <div class="section-title"><div><p class="micro">03 / WORKFLOW AUTOMATION</p><h2>Ticket workspace</h2><p>Create an example incident and move it through the support queue.</p></div><span class="section-pill" id="storage-label">BROWSER-ONLY SAMPLES</span></div>
+    <div class="queue-grid">
+      <form class="ticket-form panel" id="ticket-form">
+        <h3>Create a practice ticket</h3>
+        <label for="ticket-title">Incident title</label>
+        <input id="ticket-title" required minlength="3" maxlength="120" placeholder="Example: VPN connection failure">
+        <label for="ticket-description">Details (fictional only)</label>
+        <textarea id="ticket-description" rows="3" maxlength="1200" placeholder="Write symptoms without passwords, personal details, or customer data."></textarea>
+        <div class="formgrid"><div><label for="ticket-category">Category</label><select id="ticket-category"><option>Identity &amp; Access</option><option>Networking</option><option>Hardware</option><option>Software</option><option>Security</option><option>Other</option></select></div><div><label for="ticket-priority">Priority</label><select id="ticket-priority"><option value="medium">Medium</option><option value="low">Low</option><option value="high">High</option></select></div></div>
+        <button type="submit" id="ticket-button" class="create">Create ticket <span>+</span></button>
+        <p class="form-info" id="ticket-info" aria-live="polite">Public preview tickets disappear on refresh. Local server tickets are saved to SQLite.</p>
+      </form>
+      <div class="ticket-queue panel">
+        <div class="queue-head"><h3>Recent incidents</h3><span id="queue-status">Demo queue</span></div>
+        <div id="ticket-list" class="ticket-list" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+  <section class="kb-section" id="knowledge">
+    <div class="section-title"><div><p class="micro">04 / KNOWLEDGE MANAGEMENT</p><h2>Explore the runbooks</h2><p>The same JSON knowledge base powers both the public demo and the Python backend.</p></div></div>
+    <div class="kb-tools"><label for="kb-search">Filter articles</label><input type="search" id="kb-search" placeholder="Search by topic, error, or category"><span id="kb-count"></span></div>
+    <div class="kb-grid" id="kb-list"></div>
+  </section>
+  <footer class="footer"><div><strong>AI HELPDESK COPILOT</strong><p>Portfolio project by Marlon Taylor. Self-hosted GitHub Pages demo. No API charges.</p></div><div><a href="https://github.com/MarlonTheEngineer/my-portfolio/tree/main/projects/ai-helpdesk-copilot">Operating guide + Obsidian notes ↗</a></div></footer>
+</main>
+</body>
+</html>
