@@ -41,5 +41,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate AI helpdesk browser script
+        run: node --check docs/helpdesk-copilot/app.js
       - name: Test neural network engine
         run: node --test docs/neural-network/tests.js
