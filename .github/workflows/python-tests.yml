@@ -35,9 +35,13 @@ jobs:
         run: python -m unittest discover -s projects/helpdesk-ticket-cli/tests -v
       - name: Test log analyzer
         run: python -m unittest discover -s projects/log-analyzer/tests -v
+      - name: Test AI helpdesk copilot
+        run: python -m unittest discover -s projects/ai-helpdesk-copilot/tests -v
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Validate AI helpdesk browser script
+        run: node --check docs/helpdesk-copilot/app.js
       - name: Test neural network engine
         run: node --test docs/neural-network/tests.js
