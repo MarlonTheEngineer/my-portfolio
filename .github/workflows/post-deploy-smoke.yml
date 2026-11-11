@@ -1,8 +1,13 @@
 name: Portfolio Post-Deploy Smoke
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - ".github/workflows/post-deploy-smoke.yml"
   # GitHub Pages currently runs its own branch-based deployment.
-  # Check the public routes after a successful Pages build, and weekly as a fallback.
+  # Push checks retry during Pages propagation; workflow_run and weekly schedule are additional paths.
   workflow_run:
     workflows: ["pages build and deployment"]
     types: [completed]
