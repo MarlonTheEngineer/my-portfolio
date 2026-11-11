@@ -9,11 +9,10 @@ import json
 import os
 import re
 import sqlite3
+from contextlib import closing
 from datetime import datetime, timezone
-from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlsplit
 
 from engine import assist
 
@@ -41,7 +40,7 @@ def connect(db_path):
 
 
 def get_tickets(db_path):
-    with connect(db_path) as db:
+    with closing(connect(db_path)) as db:
         rows = db.execute(
             "SELECT id,title,description,category,priority,status,created_at "
             "FROM tickets ORDER BY id DESC LIMIT 50"
@@ -63,7 +62,7 @@ def create_ticket(db_path, record):
     if category not in CATEGORIES or priority not in PRIORITIES:
         raise ValueError("Unknown ticket category or priority")
     created_at = datetime.now(timezone.utc).isoformat()
-    with connect(db_path) as db:
+    with closing(connect(db_path)) as db:
         cursor = db.execute(
             "INSERT INTO tickets(title,description,category,priority,status,created_at) "
             "VALUES(?,?,?,?,?,?)",
@@ -76,7 +75,7 @@ def create_ticket(db_path, record):
 
 
 def close_ticket(db_path, ticket_id):
-    with connect(db_path) as db:
+    with closing(connect(db_path)) as db:
         cursor = db.execute(
             "UPDATE tickets SET status='closed' WHERE id=? AND status='open'",
             (ticket_id,)
