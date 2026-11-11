@@ -4,7 +4,6 @@ Uses only Python's standard library; no paid API, tracking, or cloud AI calls.
 The knowledge articles are also used by the GitHub Pages browser demo.
 """
 import json
-import math
 import os
 import re
 from pathlib import Path
