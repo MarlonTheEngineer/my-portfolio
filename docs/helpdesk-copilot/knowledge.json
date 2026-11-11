@@ -1,0 +1,251 @@
+{
+  "version": "1.0",
+  "notice": "Synthetic training knowledge base. Adapt every step to organizational policies; not an authoritative production runbook.",
+  "articles": [
+    {
+      "id": "KB-001",
+      "title": "Account locked or cannot sign in",
+      "category": "Identity & Access",
+      "summary": "Check the exact error, account state, and identity verification procedure before changing access.",
+      "keywords": [
+        "login",
+        "logon",
+        "sign in",
+        "locked out",
+        "active directory",
+        "account disabled",
+        "credentials",
+        "password",
+        "domain",
+        "windows"
+      ],
+      "steps": [
+        "Record the error message and whether the issue affects one account or several users.",
+        "Verify the requester's identity using your organization's approved procedure before any account changes.",
+        "Check account lockout, disablement, password expiration, and recent failed sign-in indicators in the authorized admin console.",
+        "Confirm device time and network/domain connectivity when authentication relies on a domain.",
+        "Unlock or reset only if authorized, then test sign-in and document the action."
+      ],
+      "caution": "Never bypass identity verification, MFA, or an organization's access controls."
+    },
+    {
+      "id": "KB-002",
+      "title": "Password reset and password expiration",
+      "category": "Identity & Access",
+      "summary": "Follow the approved reset workflow and check for stale credentials on other devices.",
+      "keywords": [
+        "reset password",
+        "password expired",
+        "forgot password",
+        "password change",
+        "incorrect password",
+        "cached password",
+        "unlock"
+      ],
+      "steps": [
+        "Confirm the exact account and complete the required identity check.",
+        "Check whether a reset is appropriate or if the user can complete self-service recovery.",
+        "Use only the organization's authorized reset method; require a new private credential.",
+        "Have the user update saved credentials in approved apps and devices.",
+        "Confirm access, update the ticket, and avoid recording passwords."
+      ],
+      "caution": "Do not request or store the user's password in a ticket."
+    },
+    {
+      "id": "KB-003",
+      "title": "MFA prompts not arriving",
+      "category": "Identity & Access",
+      "summary": "Isolate whether the problem is the app, device, time synchronization, or registered method.",
+      "keywords": [
+        "mfa",
+        "2fa",
+        "authenticator",
+        "push notification",
+        "two factor",
+        "authentication code",
+        "verification code",
+        "otp",
+        "duo"
+      ],
+      "steps": [
+        "Confirm the expected authentication method and which prompts are missing.",
+        "Check the device's time, network connectivity, notification permissions, and authenticator app state.",
+        "Ask the user to retry using a permitted backup method if one is already enrolled.",
+        "Review authentication logs for denied prompts, failed attempts, or blocked sign-ins.",
+        "Escalate account recovery or method re-enrollment under approved policy."
+      ],
+      "caution": "Never approve unexpected prompts or disable MFA merely to bypass an issue."
+    },
+    {
+      "id": "KB-004",
+      "title": "VPN fails to connect",
+      "category": "Networking",
+      "summary": "Determine whether the failure involves connectivity, credentials, VPN software, or an outage.",
+      "keywords": [
+        "vpn",
+        "remote work",
+        "remote access",
+        "tunnel",
+        "connection failed",
+        "ras",
+        "split tunnel",
+        "remote desktop"
+      ],
+      "steps": [
+        "Verify normal internet access before connecting to VPN.",
+        "Capture the VPN client name, exact error text, and approximate start time.",
+        "Check service status, permitted client version, and device clock.",
+        "Confirm the account is authorized and any required MFA is completing successfully.",
+        "Retry the documented connection procedure and escalate persistent gateway or certificate errors."
+      ],
+      "caution": "Do not weaken firewall rules or disable endpoint protection to make VPN connect."
+    },
+    {
+      "id": "KB-005",
+      "title": "Wi-Fi connects but internet does not work",
+      "category": "Networking",
+      "summary": "Narrow down whether the problem is one device, a wireless network, DNS, or the upstream connection.",
+      "keywords": [
+        "wifi",
+        "wi-fi",
+        "wireless",
+        "internet",
+        "connected no internet",
+        "network",
+        "router",
+        "ssid",
+        "dhcp"
+      ],
+      "steps": [
+        "Check whether another trusted device on the same Wi-Fi network can reach the internet.",
+        "Confirm the device is connected to the intended SSID with a valid IP address.",
+        "Check the local gateway and whether name resolution works for approved test sites.",
+        "Forget and rejoin the network only when permitted; renew the lease if required.",
+        "Escalate suspected access-point, DHCP, or ISP outages with the observed symptoms."
+      ],
+      "caution": "Do not connect a work device to an untrusted hotspot without approval."
+    },
+    {
+      "id": "KB-006",
+      "title": "Printer offline or job stuck",
+      "category": "Hardware",
+      "summary": "Separate physical printer problems from queue, driver, and connectivity issues.",
+      "keywords": [
+        "printer",
+        "printing",
+        "offline",
+        "print queue",
+        "spooler",
+        "paper jam",
+        "toner",
+        "driver"
+      ],
+      "steps": [
+        "Check power, error lights, paper supply, and visible jams.",
+        "Confirm the selected printer and whether the issue affects one user or several.",
+        "Review the printer queue for paused or stuck jobs; clear jobs only with authorization.",
+        "Verify the expected printer address and network connectivity.",
+        "Use approved driver or spooler troubleshooting and print a test page."
+      ],
+      "caution": "Avoid clearing shared queues without notifying affected users."
+    },
+    {
+      "id": "KB-007",
+      "title": "Windows update or application installation fails",
+      "category": "Software",
+      "summary": "Collect failure details, storage availability, permissions, and deployment policy.",
+      "keywords": [
+        "windows update",
+        "update failed",
+        "install",
+        "installation",
+        "software",
+        "application",
+        "patch",
+        "error code"
+      ],
+      "steps": [
+        "Record the affected app or update, version, exact error, and when it started.",
+        "Confirm supported OS version, available disk space, and device management requirements.",
+        "Restart when permitted and check whether an approved maintenance window applies.",
+        "Review supported update history or installation logs for an error code.",
+        "Escalate repeated failures rather than disabling security controls."
+      ],
+      "caution": "Do not install unapproved software or turn off security protection."
+    },
+    {
+      "id": "KB-008",
+      "title": "DNS resolution and website access",
+      "category": "Networking",
+      "summary": "Distinguish name lookup failures from general loss of network connectivity.",
+      "keywords": [
+        "dns",
+        "domain name",
+        "resolve",
+        "website won't load",
+        "site not found",
+        "nslookup",
+        "browser",
+        "ip address"
+      ],
+      "steps": [
+        "Confirm the full hostname and whether the issue affects other users.",
+        "Test approved websites and basic connectivity to isolate name resolution.",
+        "Check that the device received the organization's expected DNS settings.",
+        "Inspect resolver errors and compare a known-good device where allowed.",
+        "Escalate DNS server, proxy, or filtering changes to network administrators."
+      ],
+      "caution": "Do not replace corporate DNS servers with public resolvers without approval."
+    },
+    {
+      "id": "KB-009",
+      "title": "Computer slow or low on disk space",
+      "category": "Hardware",
+      "summary": "Inspect resource usage and storage pressure before changing software.",
+      "keywords": [
+        "slow computer",
+        "performance",
+        "cpu",
+        "memory",
+        "ram",
+        "disk",
+        "storage",
+        "low space",
+        "freeze",
+        "lag"
+      ],
+      "steps": [
+        "Ask when slowness occurs and whether a restart changes it.",
+        "Inspect CPU, memory, and disk usage using authorized monitoring tools.",
+        "Check free storage and permitted cleanup targets, including temporary files.",
+        "Review recent updates and running apps; avoid stopping essential processes.",
+        "Document before-and-after behavior and escalate hardware faults."
+      ],
+      "caution": "Never delete a user's files without permission and a backup plan."
+    },
+    {
+      "id": "KB-010",
+      "title": "Suspicious email or possible phishing",
+      "category": "Security",
+      "summary": "Preserve evidence, reduce interaction, and report possible phishing through established channels.",
+      "keywords": [
+        "phishing",
+        "scam",
+        "suspicious email",
+        "malicious link",
+        "email attachment",
+        "spoof",
+        "credential theft",
+        "security"
+      ],
+      "steps": [
+        "Tell the user not to click further links, download attachments, or reply.",
+        "Record the visible sender, subject, timestamp, and observable signs without forwarding the message casually.",
+        "Use the organization's approved phishing-report workflow to preserve the message safely.",
+        "If a link was clicked or credentials were entered, immediately follow incident response procedures.",
+        "Document the report and alert the security team for analysis."
+      ],
+      "caution": "Do not open suspicious attachments or paste credentials into a report."
+    }
+  ]
+}
