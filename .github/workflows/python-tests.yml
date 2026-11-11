@@ -1,4 +1,4 @@
-name: Portfolio quality checks
+name: Portfolio CI / Release Pipeline
 
 on:
   push:
@@ -7,41 +7,98 @@ on:
       - "projects/**"
       - "scripts/**"
       - "README.md"
-      - ".github/workflows/python-tests.yml"
+      - ".github/workflows/**"
   pull_request:
-    paths:
-      - "docs/**"
-      - "projects/**"
-      - "scripts/**"
-      - "README.md"
-      - ".github/workflows/python-tests.yml"
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
+    name: Tests and site audit (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         python-version: ["3.11", "3.12"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Validate website
+
+      - name: Check homepage and navigation
         run: python scripts/check_site.py
+
+      - name: Audit every static page and local asset
+        run: python projects/ci-cd-pipeline/pipeline.py check
+
       - name: Test helpdesk ticket tracker
         run: python -m unittest discover -s projects/helpdesk-ticket-cli/tests -v
+
       - name: Test log analyzer
         run: python -m unittest discover -s projects/log-analyzer/tests -v
+
       - name: Test AI helpdesk copilot
         run: python -m unittest discover -s projects/ai-helpdesk-copilot/tests -v
+
+      - name: Test artifact packaging and tamper detection
+        run: python -m unittest discover -s projects/ci-cd-pipeline/tests -v
+
+      - name: Compile Python modules
+        run: python -m compileall -q projects scripts
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-      - name: Validate AI helpdesk browser script
-        run: node --check docs/helpdesk-copilot/app.js
+          node-version: "22"
+
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check docs/neural-network/neural-network.js
+          node --check docs/neural-network/app.js
+          node --check docs/helpdesk-copilot/app.js
+          node --check docs/pipeline/app.js
+
       - name: Test neural network engine
         run: node --test docs/neural-network/tests.js
+
+  package:
+    name: Build and verify release artifact
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build a deterministic release archive
+        run: python projects/ci-cd-pipeline/pipeline.py build --output dist/portfolio-release.zip --commit "${{ github.sha }}"
+
+      - name: Independently verify every archived file hash
+        run: python projects/ci-cd-pipeline/pipeline.py verify dist/portfolio-release.zip
+
+      - name: Upload release ZIP for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-site-${{ github.sha }}
+          path: dist/portfolio-release.zip
+          if-no-files-found: error
+          retention-days: 7
+
+# GitHub Pages keeps its existing free branch-based main/docs publisher.
+# That deployment is separate from this workflow and is not gated by these tests.
+# See projects/ci-cd-pipeline/README.md for the architectural limitation.
