@@ -41,7 +41,7 @@ class KnowledgeTests(unittest.TestCase):
     def test_guidance_includes_exact_citation_and_safety(self):
         selected = engine.search_articles("printer offline")
         text = engine.guided_answer("printer offline", selected)
-        self.assertIn("[KB-006]" if False else "KB-006", text)
+        self.assertIn("KB-006", text)
         self.assertIn("Safety note:", text)
 
     def test_input_limits(self):
